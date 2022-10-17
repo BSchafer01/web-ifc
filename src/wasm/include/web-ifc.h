@@ -972,7 +972,10 @@ namespace webifc
 						file << setiosflags(ios::uppercase);
 						file << d;
 
-
+						if(floor(d) == ceil(d))
+                        {
+                            file << ".";
+                        }
 						file.unsetf(std::ios::uppercase);
 						break;
 					}
