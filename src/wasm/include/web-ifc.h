@@ -969,9 +969,11 @@ namespace webifc
 					case IfcTokenType::REAL:
 					{
 						double d = _tape.Read<double>();
-
+						file << setiosflags(ios::uppercase);
 						file << d;
 
+
+						file.unsetf(std::ios::uppercase);
 						break;
 					}
 					default:
