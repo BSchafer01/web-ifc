@@ -1402,6 +1402,24 @@ namespace webifc
 
 				return false;
 			}
+			case ifc2x4::IFCMATERIALLIST:
+			{
+				_loader.MoveToArgumentOffset(line, 0);
+				auto layers = _loader.GetSetArgument();
+
+				for(auto &layer : layers)
+				{
+					uint32_t layerID = _loader.GetRefArgument(layer);
+					glm::dvec4 color;
+					bool foundColor = GetColor(layerID, color);
+					if(foundColor)
+					{
+						outputColor = color;
+						return true;
+					}
+				}
+				return false;
+			}
 			default:
 				_loader.ReportError({LoaderErrorType::UNSUPPORTED_TYPE, "unexpected style type", line.expressID, line.ifcType});
 				break;
